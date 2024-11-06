@@ -12,6 +12,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
       child: SafeArea(
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

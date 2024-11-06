@@ -1,5 +1,6 @@
 import 'package:aplikasi_pencatatan_keuangan/page/category_page.dart';
 import 'package:aplikasi_pencatatan_keuangan/page/home_page.dart';
+import 'package:aplikasi_pencatatan_keuangan/page/transaction_page.dart';
 import 'package:calendar_appbar/calendar_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -49,7 +50,15 @@ class _MainPageState extends State<MainPage> {
       floatingActionButton: Visibility(
         visible: _currentIndex == 0 ? true : false,
         child: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(
+                builder: (context) => TransactionPage(),
+              ))
+                  .then((value) {
+                setState(() {});
+              });
+            },
             backgroundColor: Colors.orange,
             shape: CircleBorder(),
             child: Icon(

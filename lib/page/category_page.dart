@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CategoryPage extends StatefulWidget {
   const CategoryPage({super.key});
@@ -9,6 +10,59 @@ class CategoryPage extends StatefulWidget {
 
 class _CategoryPageState extends State<CategoryPage> {
   bool _switchValue = false;
+
+  void OpenDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: SingleChildScrollView(
+              child: Center(
+                child: Column(
+                  children: [
+                    Text(
+                      (_switchValue)
+                          ? "Tambah Pemasukan"
+                          : "Tambah Pengeluaran",
+                      style: GoogleFonts.montserrat(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color:
+                              (_switchValue) ? Colors.orange : Colors.red[400]),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: "Tambahkan Data"),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            (_switchValue) ? Colors.orange : Colors.red[400],
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.elliptical(5, 8)),
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: Text("Simpan",
+                          style: GoogleFonts.montserrat(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ],
+                ), 
+              ),
+            ),
+          );
+        });
+  } 
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +85,25 @@ class _CategoryPageState extends State<CategoryPage> {
                 inactiveThumbColor: const Color.fromARGB(255, 216, 214, 214),
                 activeColor: Colors.orange,
               ),
-              IconButton(onPressed: () {}, icon: Icon(Icons.add))
+              IconButton(
+                  onPressed: () {
+                    OpenDialog();
+                  },
+                  icon: Icon(Icons.add))
             ],
           ),
           Card(
               elevation: 10,
               child: ListTile(
-                leading: Icon(
-                  Icons.upload,
-                  color: Colors.red[400],
-                ),
+                leading: (_switchValue)
+                    ? Icon(
+                        Icons.download,
+                        color: Colors.orange,
+                      )
+                    : Icon(
+                        Icons.upload,
+                        color: Colors.red[400],
+                      ),
                 title: Text("Sedekah"),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -50,13 +113,18 @@ class _CategoryPageState extends State<CategoryPage> {
                   ],
                 ),
               )),
-              Card(
+          Card(
               elevation: 10,
               child: ListTile(
-                leading: Icon(
-                  Icons.download,
-                  color: Colors.orange,
-                ),
+                leading: (_switchValue)
+                    ? Icon(
+                        Icons.download,
+                        color: Colors.orange,
+                      )
+                    : Icon(
+                        Icons.upload,
+                        color: Colors.red[400],
+                      ),
                 title: Text("Sedekah"),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -65,7 +133,7 @@ class _CategoryPageState extends State<CategoryPage> {
                     IconButton(onPressed: () {}, icon: Icon(Icons.edit))
                   ],
                 ),
-              ))
+              )),
         ],
       ),
     ));
