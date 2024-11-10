@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -66,18 +65,16 @@ class _TransactionPageState extends State<TransactionPage> {
               TextFormField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                    border: UnderlineInputBorder(),
+                    border: OutlineInputBorder(),
                     labelText: "Jumlah Transaksi",
-                    labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+                    prefixText: "Rp"),
               ),
               SizedBox(
                 height: 20,
               ),
-              Text(
-                "Kategori",
-                style: TextStyle(fontSize: 20),
-              ),
-              DropdownButton<String>(
+              DropdownButtonFormField<String>(
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(), labelText: "Kategori"),
                   hint: Text(
                     "Pilih Category",
                     style: GoogleFonts.montserrat(fontSize: 16),
@@ -100,7 +97,8 @@ class _TransactionPageState extends State<TransactionPage> {
               TextField(
                 readOnly: true,
                 controller: dateControler,
-                decoration: InputDecoration(label: Text("Pilih Tanggal")),
+                decoration: InputDecoration(
+                    labelText: "Pilih Tanggal", border: OutlineInputBorder()),
                 onTap: () async {
                   DateTime? selectDate = await showDatePicker(
                       context: context,
@@ -110,11 +108,18 @@ class _TransactionPageState extends State<TransactionPage> {
 
                   if (selectDate != null) {
                     String FormatDatetime =
-                        DateFormat('dd-MM-yyyy').format(selectDate);
+                        DateFormat('dd/MM/yyyy').format(selectDate);
 
                     dateControler.text = FormatDatetime;
                   }
                 },
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                    labelText: "Detail", border: OutlineInputBorder()),
               ),
               SizedBox(
                 height: 20,
@@ -127,7 +132,11 @@ class _TransactionPageState extends State<TransactionPage> {
                             borderRadius:
                                 BorderRadius.all(Radius.elliptical(5, 8)))),
                     onPressed: () {},
-                    child: Text("Simpan", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)),
+                    child: Text(
+                      "Simpan",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    )),
               )
             ],
           )),

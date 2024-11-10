@@ -1,0 +1,18 @@
+Kategori 
+    1. kategori_id
+    2. name
+    3. type(1 = pemasukan , 2 = pengeluaran)
+    4. created_at
+    5. updated_at
+    6. deleted_at
+
+
+Transaksi
+    1. transaksi_id
+    2. name
+    3. kategori_id
+    4. jumlah_transaksi
+    5. tanggal_transaksi
+    6. created_at
+    7. updated_at
+    8. deleted_at
