@@ -1,4 +1,5 @@
- import "package:drift/drift.dart";
+ import "package:aplikasi_pencatatan_keuangan/page/transaction_page.dart";
+import "package:drift/drift.dart";
 import "package:drift/native.dart";
 import "package:path/path.dart" as p;
 import "package:path_provider/path_provider.dart";
@@ -6,7 +7,7 @@ import "dart:io";
 
 
 class Kategori extends Table{
-  IntColumn get kategori_id => integer().autoIncrement()();
+  IntColumn  get kategori_id => integer().autoIncrement()();
   TextColumn get kategori_name => text().withLength(max: 128)();
   IntColumn get type => integer()();
   DateTimeColumn get created_at => dateTime()();
@@ -23,4 +24,17 @@ class Transaksi extends Table{
   DateTimeColumn get created_at => dateTime()();
   DateTimeColumn get updated_at => dateTime()();
   DateTimeColumn get deleted_at => dateTime()();
+}
+
+
+@DriftDatabase(tables : [Kategori, Transaksi])
+
+class AppDatabase extends _$AppDatabase{
+  AppDatabase() : super(_openConnection());
+
+  @override
+  int get SchemaVersion => 1;
+
+  Future<List<kategori>> getAllKategori() => select(kategori).get();
+
 }
